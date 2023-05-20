@@ -25,7 +25,7 @@ public static void main(String[] args) {
 
 	camrnt = new CameraValue(14, "NIKON", "DSLRD75",500.00f, "Available");
 	rentacam.add(camrnt);
-	camrnt = new CameraValue(15, "Sony", "DSLR12",200.00f, "Available");
+	camrnt = new CameraValue(15, "Sony", "DSLR12",1200.00f, "Available");
 	rentacam.add(camrnt);
 	
 	camrnt = new CameraValue(17, "Samsung", "SM123 ",567.80f, "Available");
@@ -171,22 +171,29 @@ public static void main(String[] args) {
 		    	  			int rent_cam_id = sc.nextInt();
 		    	  			Camera user1 = new Camera();
 		    	  			double Avail;
+		    	  			boolean bn = false;
 		    	  			for (int i = 0; i < rentacam.size(); i++) {
 			    	  			CameraValue c = rentacam.get(i);
 			    	  				if (c.getCamid() == rent_cam_id) {	
-			    	  					if(c.getRentperday()>= user1.wallet) {
-			    	  						
-			    	  				          
+			    	  					if(c.getRentperday()<= user1.wallet) {
+			    	  						bn = true;
+			    	  						System.out.println( c.getBrand()+" " +  c.getModel() + " with rent INR " + c.getRentperday() + " HAS SUCCESSFULLY COMPLETED ");
+				    	  					 Avail = (user1.wallet-c.getRentperday());
+				    	  					 System.out.println("Available Balance - "+Avail);
 			    	  				           // Avail = (user1.wallet-c.getRentperday());
 			    	  				           //returns balance wallet money after rent
 			    	  				           
 			    	  					}
-			    	  					 System.out.println( c.getBrand()+" " +  c.getModel() + " with rent INR " + c.getRentperday() + " HAS SUCCESSFULLY COMPLETED ");
-			    	  					 Avail = (user1.wallet-c.getRentperday());
-			    	  					 System.out.println("Available Balance - "+Avail);
+			    	  					 //System.out.println( c.getBrand()+" " +  c.getModel() + " with rent INR " + c.getRentperday() + " HAS SUCCESSFULLY COMPLETED ");
+			    	  					 //Avail = (user1.wallet-c.getRentperday());
+			    	  					 //System.out.println("Available Balance - "+Avail);
 			    	  					}
 		    	  			         }
-		    	  						break;
+		    	  			if(bn==false)
+		    	  				//when not founded/rented
+		    	  				System.out.println("INSUFFICIENT BALANCE.....");
+		    	  			break;
+		    	  						//break;
 
 		      
 			    	  	case 3:
