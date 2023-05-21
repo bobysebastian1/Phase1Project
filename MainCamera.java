@@ -1,6 +1,8 @@
 package cameraRentall;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -51,6 +53,7 @@ public static void main(String[] args) {
 			
 				
 			//first screen
+				try{
 				{
 				System.out.println("1. MY CAMERA \n2. RENT A CAMERA \n"
 						+ "3. VIEW ALL CAMERAS \n4. MY WALLET \n"
@@ -106,7 +109,7 @@ public static void main(String[] args) {
 							    	  			System.out.println(c.getCamid() + "\t" + c.getBrand() + "\t" + c.getModel() + "\t" + c.getRentperday() + "\t" + c.getStatus());
 							    	  			}
 						    	  			System.out.println("===================================================================");
-						    	  			
+						    	  			try {
 						    	  			Scanner sc2 = new Scanner(System.in);
 						    	  			System.out.print("ENTER THE CAMERAID TO REMOVE -  ");
 						    	  			int remove = sc.nextInt();	
@@ -126,20 +129,30 @@ public static void main(String[] args) {
 						    	  			if(b==false)
 						    	  				//when not founded/rented
 						    	  				System.out.println("CAMERA NOT FOUND / IT IS RENTED.....");
-						    	  			break;
 						    	  			
-									   
+						    	  			}catch(Exception e) {System.out.println(e);}
+						    	  			
+						    	  			break;
 								      
 						    	  		case 3:
 						    	  			System.out.println("===================================================================");
 						    				System.out.println("Camid  Brand   Model  Price(/day)  Status  ");
 						    				System.out.println("===================================================================");
 						    	  			for (int i = 0; i < rentacam.size(); i++) {
-							    	  			CameraValue c = rentacam.get(i);					    	  			
+							    	  			CameraValue c = rentacam.get(i);
+							    	  			
 							    	  			System.out.println(c.getCamid() + "\t" + c.getBrand() + "\t" + c.getModel() + "\t" + c.getRentperday() + "\t" + c.getStatus());
 							    	  			}
 						    	  			System.out.println("===================================================================");
-								        break;
+						    	  			 //Collections.sort((List<CameraValue>)rentacam);
+						    	  			 
+						    	  	        // Iterate over ArrayList using for each loop
+						    	  	        for (CameraValue c : rentacam) {
+						    	  	 
+						    	  	            // Print the sorted ArrayList
+						    	  	        	System.out.println(c.getCamid() + "\t" + c.getBrand() + "\t" + c.getModel() + "\t" + c.getRentperday() + "\t" + c.getStatus());
+						    	  	        }
+						    	  			break;
 		
 								      
 						    	  		case 4:
@@ -165,6 +178,7 @@ public static void main(String[] args) {
 			    	  			}
 			    	  		
 		    	  			}
+		    	  			try {
 		    	  			System.out.println("===================================================================");
 		    	  			Scanner sc5 = new Scanner(System.in);
 		    	  			System.out.print("\nENTER THE CAMERAID TO RENT -  ");
@@ -180,8 +194,10 @@ public static void main(String[] args) {
 			    	  						System.out.println( c.getBrand()+" " +  c.getModel() + " with rent INR " + c.getRentperday() + " HAS SUCCESSFULLY COMPLETED ");
 				    	  					 Avail = (user1.wallet-c.getRentperday());
 				    	  					 System.out.println("Available Balance - "+Avail);
-			    	  				           // Avail = (user1.wallet-c.getRentperday());
+			    	  				           
 			    	  				           //returns balance wallet money after rent
+				    	  					 
+				    	  					//double Avail2 = (c.getRentperday()-user1.wallet);
 			    	  				           
 			    	  					}
 			    	  					 //System.out.println( c.getBrand()+" " +  c.getModel() + " with rent INR " + c.getRentperday() + " HAS SUCCESSFULLY COMPLETED ");
@@ -190,8 +206,18 @@ public static void main(String[] args) {
 			    	  					}
 		    	  			         }
 		    	  			if(bn==false)
-		    	  				//when not founded/rented
+		    	  				//when not sufficient balance
+		    	  				for (int i = 0; i < rentacam.size(); i++) {
+				    	  			CameraValue c = rentacam.get(i);
+				    	  				if (c.getCamid() == rent_cam_id) {	
+				    	  					if(c.getRentperday()>= user1.wallet) {
 		    	  				System.out.println("INSUFFICIENT BALANCE.....");
+		    	  				double Avail2 = (c.getRentperday()-user1.wallet);
+		    	  				System.out.println("YOU ARE INR "+Avail2+" SHORT TO RENT.....ADD MONEY AND CONTINUE PURCHASING");
+				    	  					}
+				    	  				}
+		    	  				}
+		    	  			}catch(Exception e) {System.out.println(e);}
 		    	  			break;
 		    	  						//break;
 
@@ -212,6 +238,7 @@ public static void main(String[] args) {
 				    	  //Scanner sc3 = new Scanner(System.in);
 				    	  //Camera user1 = new Camera();
 				    	  //printing available balance
+			    	  		try {
 				    	  System.out.println("AVAILABLE BALANCE - "+ user.wallet);
 				    	  System.out.println("DO YOU WANT TO ADD MONEY TO WALLET - (1.YES 2.NO)");
 				    	  int w = sc.nextInt();
@@ -225,16 +252,24 @@ public static void main(String[] args) {
 				    	  else {
 				    		  System.out.println("AVAILABLE BALANCE - "+ user.wallet+" INR");
 				    	  }
+			    	  	}catch(InputMismatchException e) {System.out.println("Enter an Integer "+e);}
+			    	  	 catch(Exception e) {System.out.println(e);}	
 					  break;
 					   case 5:
 			    		  CloseApp();//closing the app
-			    	  break;
+			    		  
+					   default:
+					        System.out.println("INVALID OPERATOR");
+
+					    break;
+			    	 // break;
 			    	    }
-			    	 
+				}
 			//System.out.println("  Login Successful");
-			
+				}catch(InputMismatchException e) {System.out.println("Enter an Integer Value to proceed...\n"+e);}
+	    	  	 catch(Exception e) {System.out.println(e);}
 		
-				 }
+				 
 				
                       else
                       {
