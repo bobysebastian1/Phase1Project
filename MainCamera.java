@@ -130,8 +130,8 @@ public static void main(String[] args) {
 						    	  				//when not founded/rented
 						    	  				System.out.println("CAMERA NOT FOUND / IT IS RENTED.....");
 						    	  			
-						    	  			}catch(Exception e) {System.out.println(e);}
-						    	  			
+						    	  			}catch(InputMismatchException e) {System.out.println("Enter a Correct Integer Value to proceed...\n"+e);}
+						    	  			catch(Exception e) {System.out.println(e);}
 						    	  			break;
 								      
 						    	  		case 3:
@@ -215,9 +215,17 @@ public static void main(String[] args) {
 		    	  				double Avail2 = (c.getRentperday()-user1.wallet);
 		    	  				System.out.println("YOU ARE INR "+Avail2+" SHORT TO RENT.....ADD MONEY AND CONTINUE PURCHASING");
 				    	  					}
+				    	  				
+				    	  				
 				    	  				}
+				    	  				//else {System.out.println("Camera Not Found");}
 		    	  				}
-		    	  			}catch(Exception e) {System.out.println(e);}
+		    	  		
+		    	  			
+		    	  			}
+		    	  			
+		    	  			catch(InputMismatchException e) {System.out.println("Enter a Correct Integer Value to proceed...\n"+e);}
+		    	  			catch(Exception e) {System.out.println(e);}
 		    	  			break;
 		    	  						//break;
 
@@ -266,7 +274,7 @@ public static void main(String[] args) {
 			    	    }
 				}
 			//System.out.println("  Login Successful");
-				}catch(InputMismatchException e) {System.out.println("Enter an Integer Value to proceed...\n"+e);}
+				}catch(InputMismatchException e) {System.out.println("Enter a Correct Integer Value to proceed...\n"+e);}
 	    	  	 catch(Exception e) {System.out.println(e);}
 		
 				 
